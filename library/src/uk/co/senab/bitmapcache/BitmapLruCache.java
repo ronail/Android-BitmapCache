@@ -229,7 +229,7 @@ public class BitmapLruCache {
         // First try Memory Cache
         result = getFromMemoryCache(url);
 
-        if (null == result) {
+        if (null == result && Looper.myLooper() != Looper.getMainLooper()) {	// get from disk only when not being called from main thread
             // Memory Cache failed, so try Disk Cache
             result = getFromDiskCache(url, decodeOpts);
         }
