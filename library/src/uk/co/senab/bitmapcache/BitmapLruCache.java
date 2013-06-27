@@ -169,7 +169,10 @@ public class BitmapLruCache {
      *         otherwise.
      */
     public boolean contains(String url) {
-        return containsInMemoryCache(url) || containsInDiskCache(url);
+        boolean contain = containsInMemoryCache(url);
+        if (Looper.myLooper() != Looper.getMainLooper())
+        	contain |= containsInDiskCache(url);
+        return contain;
     }
 
     /**
