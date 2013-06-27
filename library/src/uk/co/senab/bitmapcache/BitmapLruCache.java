@@ -272,7 +272,7 @@ public class BitmapLruCache {
                         if (null != mMemoryCache) {
                             mMemoryCache.put(result);
                         }
-                    } else {
+                    } else if (!decodeOpts.inJustDecodeBounds){	// check if the user actually just want the size
                         // If we get here, the file in the cache can't be
                         // decoded. Remove it and schedule a flush.
                         mDiskCache.remove(key);
